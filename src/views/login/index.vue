@@ -20,6 +20,7 @@
 <script>
     export default {
         name:'login',
+
         data(){
 
             const validateEmail = (rule,value,callback)=>{
@@ -47,3 +48,23 @@
         }
     }
 </script>
+<style rel="stylesheet/scss" lang="scss">
+    @import "src/styles/mixin.scss";
+    .tips {
+        font-size:14px;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    .login-container {
+        @include relative;
+        height: 100vh;
+        background-color: #2d3a4b;
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
+            -webkit-text-fill-color: #fff !important;
+        }
+        input {
+
+        }
+    }
+</style>
