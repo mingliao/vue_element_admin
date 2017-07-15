@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        hello kitty
+
 
         <!--<router-view></router-view>-->
     </div>
