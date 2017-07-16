@@ -13,4 +13,9 @@
     该配置```:xlink:href```因为在[svg标签](http://www.runoob.com/svg/svg-reference.html)的使用中
     > xlink:href="URI引用克隆元素"
     ```xlink:href```是一个整体属性。***分开写会报错***
+2.  事件绑定
+    1. ```@keyup.enter.native```
+      *  文件路径```src/views/login/index.vue```
+      *  enter,回车事件；native，原生事件
+
 

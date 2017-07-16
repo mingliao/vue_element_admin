@@ -21,7 +21,7 @@
                 <el-input name="password" type="password" @keyup.enter.native="handleLogin" autoComplete="on" placeholder="密码"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" style="width:100%" :loading="loading">登录</el-button>
+                <el-button type="primary" style="width:100%" @click="handleLogin" :loading="loading">登录</el-button>
             </el-form-item>
             <div class='tips'>admin账号为:admin@wallstreetcn.com 密码随便填</div>
             <div class='tips'>editor账号:editor@wallstreetcn.com 密码随便填</div>
@@ -29,17 +29,46 @@
     </div>
 </template>
 <script>
+    import { isWscnEmail } from 'utils/validate';
     export default {
         name:'login',
+        methods:{
+            handleLogin(){
+                this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        this.loading = true;
+                        this.$router.push({ path: '/' });
 
+                        /*  this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
+                              this.loading = false;
+                              this.$router.push({ path: '/' });
+                              // this.showDialog = true;
+                          }).catch(err => {
+                              this.$message.error(err);
+                              this.loading = false;
+                          });*/
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                })
+            }
+        },
         data(){
-
             const validateEmail = (rule,value,callback)=>{
-                callback();
+                if(isWscnEmail(value)){
+                    callback()
+                }else {
+                    callback(new Error('请输入正确的合法邮箱'));
+                }
             }
 
             const validatePass = (rule,value,callback)=>{
-                callback();
+                if (value.length < 6) {
+                    callback(new Error('密码不能小于6位'));
+                } else {
+                    callback();
+                }
             }
 
             return {
@@ -61,7 +90,7 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "src/styles/mixin.scss";
+    @import 'src/styles/mixin.scss';
     .tips {
         font-size:14px;
         color: #fff;
